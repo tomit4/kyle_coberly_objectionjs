@@ -1,0 +1,36 @@
+// This doesn't work because we didn't create the migrations the way that Kyle Coberly did using async and await
+// to create all of his tables in one migration and on seed file..., thusly creating a single seed file that
+// asynchronously creates a table with a relation to two previous seed files needs to be addressed first so that
+// we can create a series of seed files where the auto incrementing keys intersect..
+
+// basically we would want to knex migrate:latest <SPECIFIC MIGRATION FILE_NAME> the file that has the migration query
+// that creates a table tha would create a relationship between two of our original simple tables (each with a FOREIGN KEY)
+
+// Essentially relationMappings can be thought of as being equivalent with a raw SQL JOIN statement...
+
+// class Owner extends Model {
+//   static relationMappings = {
+//     dogs: {
+//       modelClass: Dog,
+//       relation: Model.ManyToManyRelation, // essentially a JOIN statement
+//       join: { // defines the relationship based off of a foreign key column
+//         from: "owner.id",
+//         through: {
+//           from: "dog_owner.owner_id",
+//           to: "dog_owner.dog_id",
+//         },
+//         to: "dog.id",
+//       },
+//     },
+//   };
+// }
+
+// app.get("/ownersofdogs"),
+//   (req, res) => {
+//     Owner.query()
+/******************** withGraphFetched() example of eager loading, has a LOT of potential for creating complex relation queries*/
+//       .withGraphFetched("dogs")
+//       .then((owners) => {
+//         res.json({ owners });
+//       });
+//   };
